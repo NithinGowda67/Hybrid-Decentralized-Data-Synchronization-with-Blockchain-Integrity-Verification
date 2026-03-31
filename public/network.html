@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>P2P Network Visualization</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+h1{
+color:#38bdf8;
+}
+
+canvas{
+background:#111827;
+border-radius:10px;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>P2P Blockchain Network</h1>
+
+<canvas id="network" width="600" height="400"></canvas>
+
+<script>
+
+const canvas = document.getElementById("network");
+const ctx = canvas.getContext("2d");
+
+const nodes = [
+ {name:"NODE1",x:300,y:80},
+ {name:"NODE2",x:150,y:250},
+ {name:"NODE3",x:450,y:250}
+];
+
+function draw(){
+
+ctx.clearRect(0,0,600,400);
+
+ctx.strokeStyle="#38bdf8";
+ctx.lineWidth=2;
+
+/* connections */
+
+connect(nodes[0],nodes[1]);
+connect(nodes[0],nodes[2]);
+connect(nodes[1],nodes[2]);
+
+/* nodes */
+
+nodes.forEach(n=>{
+
+ctx.beginPath();
+ctx.arc(n.x,n.y,30,0,Math.PI*2);
+ctx.fillStyle="#1e293b";
+ctx.fill();
+ctx.stroke();
+
+ctx.fillStyle="white";
+ctx.font="14px Arial";
+ctx.fillText(n.name,n.x-25,n.y+5);
+
+});
+
+}
+
+function connect(a,b){
+
+ctx.beginPath();
+ctx.moveTo(a.x,a.y);
+ctx.lineTo(b.x,b.y);
+ctx.stroke();
+
+}
+
+draw();
+
+</script>
+
+</body>
+
+</html>

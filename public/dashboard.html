@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Blockchain Dashboard</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#0f172a;
+color:white;
+padding:30px;
+}
+
+h1{
+color:#38bdf8;
+}
+
+.node{
+background:#1e293b;
+padding:15px;
+margin-bottom:20px;
+border-radius:10px;
+}
+
+.block{
+background:#334155;
+padding:10px;
+margin:10px 0;
+border-radius:8px;
+font-size:13px;
+}
+
+button{
+padding:10px 20px;
+background:#38bdf8;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Distributed Blockchain Dashboard</h1>
+
+<button onclick="load()">Load Blockchain</button>
+
+<div id="container"></div>
+
+<script>
+
+async function load(){
+
+const res = await fetch('/blocks');
+
+const data = await res.json();
+
+const container=document.getElementById("container");
+
+container.innerHTML="";
+
+const node=document.createElement("div");
+
+node.className="node";
+
+node.innerHTML=`<h2>Node: ${data.node}</h2>`;
+
+data.chain.forEach(block=>{
+
+const b=document.createElement("div");
+
+b.className="block";
+
+b.innerHTML=`
+<b>Index:</b> ${block.index}<br>
+<b>Timestamp:</b> ${block.timestamp}<br>
+<b>DataHash:</b> ${block.dataHash}<br>
+<b>PrevHash:</b> ${block.previousHash}<br>
+<b>Hash:</b> ${block.hash}
+`;
+
+node.appendChild(b);
+
+});
+
+container.appendChild(node);
+
+}
+
+setInterval(load,3000);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlockChain Coin Collector — GUN Sync Demo</title>
+  <link rel="stylesheet" href="game.css" />
+</head>
+<body>
+
+  <!-- ═══ TOP NAV ═══════════════════════════════════════════════════ -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="logo">⛓ BlockChain Coin Collector</span>
+      <span class="badge">GUN P2P Sync</span>
+      <span class="badge badge-blue">SHA-256 Integrity</span>
+    </div>
+    <div class="topbar-right">
+      <span id="sync-indicator" class="sync-dot syncing">●</span>
+      <span id="sync-label">Connecting…</span>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN LAYOUT ════════════════════════════════════════════════ -->
+  <main class="layout">
+
+    <!-- LEFT: GAME + DASHBOARD ───────────────────────────────────── -->
+    <section class="left-col">
+
+      <!-- Dashboard Tiles -->
+      <div class="dashboard">
+        <div class="tile">
+          <div class="tile-label">Position X</div>
+          <div class="tile-value" id="d-x">0</div>
+        </div>
+        <div class="tile">
+          <div class="tile-label">Position Y</div>
+          <div class="tile-value" id="d-y">0</div>
+        </div>
+        <div class="tile">
+          <div class="tile-label">Score</div>
+          <div class="tile-value highlight" id="d-score">0</div>
+        </div>
+        <div class="tile">
+          <div class="tile-label">Blocks</div>
+          <div class="tile-value" id="d-blocks">1</div>
+        </div>
+        <div class="tile tile-wide">
+          <div class="tile-label">Latest Hash</div>
+          <div class="tile-value mono small" id="d-hash">genesis</div>
+        </div>
+        <div class="tile tile-wide" id="integrity-tile">
+          <div class="tile-label">Integrity Status</div>
+          <div class="tile-value" id="d-integrity">✅ VERIFIED</div>
+        </div>
+      </div>
+
+      <!-- Canvas Game Area -->
+      <div class="canvas-wrapper">
+        <canvas id="gameCanvas" width="560" height="380"></canvas>
+        <div id="overlay" class="overlay">
+          <h2>Blockchain Coin Collector</h2>
+          <p>Use <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> to move<br/>Collect coins to build the blockchain</p>
+          <button id="startBtn" class="btn-primary">▶ Start Game</button>
+        </div>
+      </div>
+
+      <!-- Controls Row -->
+      <div class="controls-row">
+        <button class="btn-secondary" id="verifyBtn">🔍 Verify Integrity</button>
+        <button class="btn-secondary" id="tamperBtn">⚠ Simulate Tamper</button>
+        <button class="btn-secondary" id="resetBtn">↺ Reset</button>
+        <span class="player-id-label">Player: <strong id="player-id-display">—</strong></span>
+      </div>
+    </section>
+
+    <!-- RIGHT: BLOCKCHAIN PANEL ──────────────────────────────────── -->
+    <section class="right-col">
+      <div class="panel-header">
+        <h3>⛓ Blockchain Ledger</h3>
+        <span id="block-count-badge" class="count-badge">1 block</span>
+      </div>
+      <div id="chain-panel" class="chain-panel">
+        <!-- blocks injected by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- GUN CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
